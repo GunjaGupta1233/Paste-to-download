@@ -2,12 +2,9 @@ async function handleClipboardData() {
     try {
         const clipboardItems = await navigator.clipboard.read();
         for (const item of clipboardItems) {
-            if (item.types.includes('image/png')) {
-                const blob = await item.getType('image/png');
+            if (item.types.includes('image/png') || item.types.includes('image/jpeg')) {
+                const blob = await item.getType(item.types[0]);
                 const url = URL.createObjectURL(blob);
-                const img = new Image();
-                img.src = url;
-                document.body.appendChild(img);
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = 'pasted-image.png';
@@ -15,7 +12,6 @@ async function handleClipboardData() {
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
-                document.body.removeChild(img);
                 break;
             }
         }
@@ -28,15 +24,8 @@ async function handleClipboardData() {
 async function requestClipboardPermission() {
     try {
         const permissionStatus = await navigator.permissions.query({ name: 'clipboard-read' });
-        if (permissionStatus.state === 'granted') {
+        if (permissionStatus.state === 'granted' || permissionStatus.state === 'prompt') {
             await handleClipboardData();
-        } else if (permissionStatus.state === 'prompt') {
-            const result = await navigator.permissions.request({ name: 'clipboard-read' });
-            if (result.state === 'granted') {
-                await handleClipboardData();
-            } else {
-                alert('Clipboard access denied. Please grant access to download images.');
-            }
         } else {
             alert('Clipboard access denied. Please grant access to download images.');
         }
@@ -54,9 +43,6 @@ document.addEventListener('paste', async function(event) {
             if (item.type.startsWith('image/')) {
                 const blob = item.getAsFile();
                 const url = URL.createObjectURL(blob);
-                const img = new Image();
-                img.src = url;
-                document.body.appendChild(img);
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = 'pasted-image.png';
@@ -64,7 +50,6 @@ document.addEventListener('paste', async function(event) {
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
-                document.body.removeChild(img);
                 break;
             }
         }
