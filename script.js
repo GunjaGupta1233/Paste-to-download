@@ -5,9 +5,11 @@ async function handleClipboardData(event) {
             if (item.type.startsWith('image/')) {
                 const blob = item.getAsFile();
                 const url = URL.createObjectURL(blob);
+                const selectedFormat = document.getElementById('file-format').value;
+                const filename = `pasted-image.${selectedFormat}`;
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'pasted-image.png';
+                a.download = filename;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
