@@ -12,6 +12,7 @@ body {
 .container {
     width: 100%;
     max-width: 1300px;
+    height: 80%;
     background-color: transparent;
     border: 2px dashed #c9c9c9;
     border-radius: 10px;
