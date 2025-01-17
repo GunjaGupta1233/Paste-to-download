@@ -45,67 +45,11 @@ codebase_output = prompter.generate_codebase_string()
 print(codebase_output)
 ```
 
-### 2. Visualizing Directory Structure
-
-Use the `generate_tree` function to create a tree representation of your project's directory.
-
-```python
-from one_codebase.tree import generate_tree
-
-# Generate the directory tree
-tree_output = generate_tree(folder_path="your_project_name")
-print(tree_output)
-```
-
-### 3. Finding and Copying File Paths
-
-Use the `find_and_copy_file_path` function to locate a specific file within your project.
-
-```python
-from one_codebase.dir import find_and_copy_file_path
-
-# Find and copy the relative path of a file
-find_and_copy_file_path(folder_name="your_project_name", file_name="example.py")
-```
-
 ---
 
-## Example Output 📄
+## Documentation 📚
 
-Here’s an example of what the generated codebase string might look like:
-
-```
-project_name: your_project_name
-
-Directory Structure:
-.
-├── README.md
-├── LICENSE
-├── CHANGELOG.md
-├── one_codebase/
-│   ├── __init__.py
-│   ├── dir.py
-│   ├── prompter.py
-│   └── tree.py
-└── setup.py
-
-
-Codebase Starts:
-
-README.md: your_project_name/README.md
-```
-# Your Project Name
-This is an example README file.
-```
-
-LICENSE: your_project_name/LICENSE
-```
-# Personal Use License Agreement
-...
-```
-
-Codebase Ends
-```
+For a more detailed guide on how to use this library, including advanced features and examples, please refer to the [official documentation](https://your-documentation-link.com).
 
 ---
 
